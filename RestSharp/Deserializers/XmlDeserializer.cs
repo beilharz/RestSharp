@@ -99,7 +99,13 @@ namespace RestSharp.Deserializers
 					continue;
 
 				var name = prop.Name.AsNamespaced(Namespace);
+				var xelement = GetElementByName(root, name);
 				var value = GetValueFromXml(root, name);
+				if (xelement == null)
+				{
+					// node does not exist
+					continue;
+				}
 
 				if (value == null)
 				{
